@@ -1,9 +1,11 @@
 package com.ignisage.reservation_service.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.UUID;
 
 @Entity
@@ -21,7 +23,12 @@ public class Reservation {
     private UUID userId;
 
     @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate reservationDate;
+
+    @Column(nullable = false)
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime reservationTime;
 
     @Column(nullable = false)
     private String status;
