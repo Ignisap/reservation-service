@@ -1,6 +1,7 @@
 package com.ignisage.reservation_service.controller;
 
 import com.ignisage.reservation_service.model.Reservation;
+import com.ignisage.reservation_service.model.dto.ReservationDTO;
 import com.ignisage.reservation_service.service.ReservationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,14 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.reservationList());
     }
 
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Reservation>  findReservation(@PathVariable UUID id) {
+//        return ResponseEntity.ok(reservationService.getReservation(id));
+//    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Reservation>  findReservation(@PathVariable UUID id) {
-        return ResponseEntity.ok(reservationService.getReservation(id));
+    public ResponseEntity<ReservationDTO>  findReservation(@PathVariable UUID id, @RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(reservationService.getReservationDTO(id, token));
     }
 
     @PostMapping
